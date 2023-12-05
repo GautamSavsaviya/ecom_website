@@ -1,0 +1,20 @@
+{% extends "base/base.html" %}
+
+{% block body %}
+
+<div class="container mt-5 pt-5">
+    <div class="row">
+        {% for product in products %}
+        <div class="col-md-3">
+            <figure class="card card-product-grid">
+                <div class="img-wrap"> <img src="/media/{{product.product_images.first.image}}"> </div>
+                <figcaption class="info-wrap border-top">
+                    <a href="{% url 'products:detail' product.slug%}" class="title">{{product.product_name|slice:":30"}}...</a>
+                    <div class="price mt-2">$ {{product.price}}</div> <!-- price-wrap.// -->
+                </figcaption>
+            </figure> <!-- card // -->
+        </div> <!-- col.// -->
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

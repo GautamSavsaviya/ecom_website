@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/html/css/bootstrap.css">
+    <style>
+        html,
+        body {
+            font-family: 'Times New Roman', Times, serif;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="m-5 border p-5 text-dark">
+        <div class="d-flex align-items-center justify-content-between">
+            <div class="">
+                <img src="/html/images/logo.png" alt="Bootstrap Ecommercer">
+            </div>
+            <div class="">
+                <h1 class="">Invoice Receipt</h1>
+            </div>
+            <div class="">
+                <h5>Invoice Number: 101</h5>
+                <h6>Order Date: 17/08/2023</h6>
+            </div>
+        </div>
+        <hr class="">
+
+        <div class="d-flex justify-content-between">
+            <div>
+                <h5>Client Information</h5>
+                <div>
+                    <p class="">{{user.first_name}} {{user.last_name}}<br>{{user.email}}</p>
+                </div>
+            </div>
+            <div>
+                <h5>Payment Details</h5>
+                <p class="mb-0"><span class="font-weight-bold">Order Id: </span>{{cart.razor_pay_order_id}}</p>
+                <p class="mb-0"><span class="font-weight-bold">Payment Type: </span>Online</p>
+            </div>
+        </div>
+        <hr>
+
+        <div class="d-flex justify-content-center">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th class="text-uppercase font-weight-bold">
+                            <h6>Sr No</h6>
+                        </th>
+                        <th class="text-uppercase  font-weight-bold">
+                            <h6>Item</h6>
+                        </th>
+                        <th class="text-uppercase font-weight-bold">
+                            <h6>Price</h6>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in cart.cart_items.all %}
+                    <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td>{{item.product.product_name}}</td>
+                        <td>${{item.get_product_price}}</td>
+                    </tr>
+                    {% endfor %}
+                    <tr>
+                        <td colspan="2"><h6>Total:</h6></td>
+                        <td>${{cart.get_total_price}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <hr>
+        <div class="mt-5">
+            <h5>Please Note:</h5>
+            Dear Consumer, the bill payment will reflect in next 48 hours in your account. Please contact our customer support for any queries regarding this order.
+
+            <div class="mt-5">
+                <h5>Thank you for using our service.</h5>
+            </div>
+
+            <div class="mt-5 text-center">
+                (This is computer generated recipt and does not required any physical signature.)
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
